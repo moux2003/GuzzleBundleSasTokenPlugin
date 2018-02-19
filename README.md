@@ -42,17 +42,15 @@ new EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle([
 
 eight_points_guzzle:
     clients:
-        api_payment:
-            base_url: "http://api.domain.tld"
+        api_azure:
+            base_url: "https://namespace.windows.net"
 
             # define headers, options
 
             # plugin settings
             plugin:
                 sasToken:
-                    sasKey:   "HaShEdKey"
-                    sasKeyName:   "DefaultFullSharedAccessSignature"
-                    uri: "https://endpoint.domain.ltd"
+                	connectionString: "Endpoint=scheme://namespace.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=HaShEdKey"
                     expires: 60 # optional
 ```
 
@@ -60,7 +58,7 @@ eight_points_guzzle:
 ``` php
 <?php 
 
-$sasToken = new \Moux2003\GuzzleBundleSasTokenPlugin\Middleware\SasTokenAuthMiddleware($sasKey, $sasKeyName, $uri);
+$sasToken = new \Moux2003\GuzzleBundleSasTokenPlugin\Middleware\SasTokenAuthMiddleware($connectionString);
 
 $stack = \GuzzleHttp\HandlerStack::create();
 
@@ -68,7 +66,7 @@ $stack = \GuzzleHttp\HandlerStack::create();
 $stack->push($sasToken->attach());
 
 $client   = new \GuzzleHttp\Client(['handler' => $stack]);
-$response = $client->get('http://www.8points.de');
+$response = $client->post('https://namespace.windows.net/hubname/messages?api-version=2013-10');
 ```
 
 ## License

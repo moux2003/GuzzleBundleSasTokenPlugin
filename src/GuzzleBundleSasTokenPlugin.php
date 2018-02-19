@@ -30,9 +30,9 @@ class GuzzleBundleWssePlugin extends Bundle implements EightPointsGuzzleBundlePl
      */
     public function loadForClient(array $config, ContainerBuilder $container, string $clientName, Definition $handler)
     {
-        if ($config['sasKey'] && $config['sasKeyName'] && $config['uri']) {
+        if ($config['connectionString']) {
             $sasToken = new Definition('%guzzle_bundle_sastoken_plugin.middleware.sastoken.class%');
-            $sasToken->setArguments([$config['sasKey'], $config['sasKeyName'], $config['uri']]);
+            $sasToken->setArguments([$config['connectionString']]);
             $sasToken->setPublic(true);
 
             $sasTokenServiceName = sprintf('guzzle_bundle_sastoken_plugin.middleware.sasToken.%s', $clientName);
@@ -53,9 +53,7 @@ class GuzzleBundleWssePlugin extends Bundle implements EightPointsGuzzleBundlePl
         $pluginNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('sasKey')->defaultNull()->end()
-                ->scalarNode('sasKeyName')->defaultNull()->end()
-                ->scalarNode('uri')->defaultNull()->end()
+                ->scalarNode('connectionString')->defaultNull()->end()
                 ->integerNode('expires')->defaultValue(60)->end()
             ->end();
     }
