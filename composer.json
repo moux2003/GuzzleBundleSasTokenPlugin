@@ -1,0 +1,32 @@
+{
+    "name":        "moux2003/guzzle-bundle-sastoken-plugin",
+    "type":        "library",
+    "description": "SAS Token Plugin for Guzzle Bundle, a PHP HTTP client library and framework for building RESTful web service clients",
+    "keywords":    ["sastoken", "sas", "token", "middleware", "plugin", "framework", "http", "rest", "web service", "curl", "client", "HTTP client"],
+    "homepage":    "https://github.com/moux2003/GuzzleBundleSasTokenPlugin",
+    "license":     "MIT",
+
+    "authors": [
+        {
+            "name":     "Maxime Hermouet",
+            "email":    "moux2003@hotmail.com",
+            "homepage": "https://github.com/moux2003"
+        }
+    ],
+
+    "require": {
+        "php":                          "^7.0",
+        "guzzlehttp/guzzle":            "^6.0",
+        "eightpoints/guzzle-bundle":    "~7.0",
+        "symfony/http-kernel":          "~2.7|~3.0|~4.0",
+        "symfony/config":               "~2.7|~3.0|~4.0",
+        "symfony/dependency-injection": "~2.7|~3.0|~4.0",
+        "symfony/expression-language":  "~2.7|~3.0|~4.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Moux2003\\GuzzleBundleSasTokenPlugin\\": "src"
+        }
+    }
+}
