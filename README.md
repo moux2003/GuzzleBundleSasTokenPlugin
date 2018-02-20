@@ -16,7 +16,7 @@ Using [composer][3]:
 ``` json
 {
     "require": {
-        "moux2003/guzzle-bundle-sastoken-plugin": "dev-master"
+        "moux2003/guzzle-bundle-sastoken-plugin": "~1.0"
     }
 }
 ```
