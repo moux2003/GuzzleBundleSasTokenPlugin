@@ -40,7 +40,6 @@ class GuzzleBundleSasTokenPlugin extends Bundle implements EightPointsGuzzleBund
             $container->setDefinition($sasTokenServiceName, $sasToken);
 
             $sasTokenExpression = new Expression(sprintf('service("%s").attach()', $sasTokenServiceName));
-
             $handler->addMethodCall('push', [$sasTokenExpression, 'sastoken']);
         }
     }

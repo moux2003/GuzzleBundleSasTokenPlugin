@@ -29,7 +29,7 @@ class SasTokenAuthMiddleware
     }
 
     /**
-     * Add WSSE auth headers to Request.
+     * Add SasToken auth headers to Request.
      *
      * @throws \InvalidArgumentException
      *
@@ -39,22 +39,24 @@ class SasTokenAuthMiddleware
     {
         return function (callable $handler): \Closure {
             return function (RequestInterface $request, array $options) use ($handler) {
-                if (null !== $this->getConnection()) {
-                    $targetUri = strtolower(rawurlencode(strtolower($request->getUri())));
-                    $expires = time();
-                    $expires = $expires + $this->getExpiresInMinutes() * 60;
-                    $toSign = $targetUri."\n".$expires;
-                    $signature = $this->generateSignature($toSign);
-
-                    $token = [
-                        sprintf('SharedAccessSignature sr=%s', $targetUri),
-                        sprintf('sig=%s', $signature),
-                        sprintf('se=%s', $expires),
-                        sprintf('skn=%s', $this->getConnection()->getSasKeyName()),
-                    ];
-
-                    $request = $request->withHeader('Authorization', implode('&', $token));
+                if (null === $this->getConnection()) {
+                    throw new \InvalidArgumentException('Error parsing connection string');
                 }
+
+                $targetUri = strtolower(rawurlencode(strtolower($request->getUri())));
+                $expires = time();
+                $expires = $expires + $this->getExpiresInMinutes() * 60;
+                $toSign = $targetUri."\n".$expires;
+                $signature = $this->generateSignature($toSign);
+
+                $token = [
+                    sprintf('SharedAccessSignature sr=%s', $targetUri),
+                    sprintf('sig=%s', $signature),
+                    sprintf('se=%s', $expires),
+                    sprintf('skn=%s', $this->getConnection()->getSasKeyName()),
+                ];
+
+                $request = $request->withHeader('Authorization', implode('&', $token));
 
                 return $handler($request, $options);
             };

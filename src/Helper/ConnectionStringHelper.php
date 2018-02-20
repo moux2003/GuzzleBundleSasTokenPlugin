@@ -27,9 +27,9 @@ class ConnectionStringHelper
             if (0 === strpos($part, 'Endpoint')) {
                 $connection->setEndpoint('https'.substr($part, 11));
             } elseif (0 === strpos($part, 'SharedAccessKeyName')) {
-                $connection->setSasKeyName('https'.substr($part, 20));
+                $connection->setSasKeyName(substr($part, 20));
             } elseif (0 === strpos($part, 'SharedAccessKey')) {
-                $connection->setSasKey('https'.substr($part, 16));
+                $connection->setSasKey(substr($part, 16));
             }
         }
 
