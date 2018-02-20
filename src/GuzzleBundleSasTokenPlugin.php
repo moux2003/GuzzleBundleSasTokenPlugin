@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\ExpressionLanguage\Expression;
 
-class GuzzleBundleWssePlugin extends Bundle implements EightPointsGuzzleBundlePlugin
+class GuzzleBundleSasTokenPlugin extends Bundle implements EightPointsGuzzleBundlePlugin
 {
     /**
      * @param array            $configs

@@ -50,7 +50,7 @@ eight_points_guzzle:
             # plugin settings
             plugin:
                 sasToken:
-                	connectionString: "Endpoint=scheme://namespace.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=HaShEdKey"
+                    connectionString: "Endpoint=scheme://namespace.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=HaShEdKey"
                     expires: 60 # optional
 ```
 
